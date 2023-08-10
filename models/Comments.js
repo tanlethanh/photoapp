@@ -22,5 +22,13 @@ CommentModel.getCommentsForPost = (postId) => {
             return Promise.resolve(results);
         }).catch(err => Promise.reject(err));
 };
+CommentModel.deletePostComments = (postId) => {
+    const baseSQL = 'DELETE FROM comments WHERE fk_postId = ?;';
+    return db.execute(baseSQL, [postId])
+        .then(([results, fields]) => {
+            return Promise.resolve(results && results.affectedRows);
+        })
+        .catch((err) => Promise.reject(err));
+};
 
 module.exports = CommentModel;

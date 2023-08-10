@@ -3,7 +3,8 @@ const router = express.Router();
 const isLoggedin = require('../middleware/routesprotector').userIsLoggedIn;
 const { getNRecentPosts, getPostById, getCommentsByPostId } = require('../middleware/postsmiddleware');
 const { getUserById } = require('../models/Users');
-const { getPostByUserId } = require('../models/Posts');
+const { getPostByUserId, deletePost } = require('../models/Posts');
+const { deletePostComments } = require('../models/Comments');
 
 // const db = require('../conf/database');
 
@@ -37,7 +38,18 @@ router.get('/profile', async (req, res, next) => {
 // post/id
 router.get('/post/:id(\\d+)', getPostById, getCommentsByPostId, (req, res, next) => {
     req.session.postId = req.params.id;
-    res.render('imagepost', { title: `Post ${req.params.id}`, post: res.locals.currentPost });
+    let flag = false;
+    if (res.locals.currentPost.username === req.session.username) {
+        flag = true;
+    }
+    res.render('imagepost', { title: `Post ${req.params.id}`, post: res.locals.currentPost, check: flag });
+});
+
+router.get('/delete/:id(\\d+)', async (req, res, next) => {
+    const postId = req.params.id;
+    await deletePostComments(postId);
+    await deletePost(postId);
+    res.redirect('/');
 });
 
 module.exports = router;

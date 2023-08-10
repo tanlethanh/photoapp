@@ -32,7 +32,7 @@ PostModel.getNRecentPosts = (numberOfPost) => {
 };
 
 PostModel.getPostById = (postId) => {
-    const baseSQL = 'SELECT u.username, p.title, p.description, p.video, p.createAt FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;';
+    const baseSQL = 'SELECT u.username, p.title, p.description, p.video, p.createAt, p.id FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;';
     return db
         .execute(baseSQL, [postId])
         .then(([results, fields]) => {
@@ -49,6 +49,15 @@ PostModel.getPostByUserId = (userId) => {
             return Promise.resolve(results);
         })
         .catch(err => Promise.reject(err));
+};
+
+PostModel.deletePost = (postId) => {
+    const baseSQL = 'DELETE FROM posts WHERE id = ?;';
+    return db.execute(baseSQL, [postId])
+        .then(([results, fields]) => {
+            return Promise.resolve(results && results.affectedRows);
+        })
+        .catch((err) => Promise.reject(err));
 };
 
 module.exports = PostModel;
