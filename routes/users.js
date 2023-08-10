@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 });
 
 
-router.post('/register', [body('username').isLength({ min: 3 }).matches(/^[a-zA-Z]/), body('password').isLength({ min: 8 }).matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)], (req, res, next) => {
+router.post('/register',  (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     req.flash('error', 'User account has not been made. One or more requirements were not met.');
@@ -81,10 +81,11 @@ router.post('/register', [body('username').isLength({ min: 3 }).matches(/^[a-zA-
     });
 })
 
-router.post('/login', [body('username').isLength({ min: 3 }).matches(/^[a-zA-Z]/), body('password').isLength({ min: 8 }).matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)], (req, res, next) => {
+router.post('/login', (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
-
+  console.log('----------------------------------------------------------------------------');
+  console.log(username, password);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     req.flash('error', 'Could not log in');

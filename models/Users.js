@@ -4,9 +4,9 @@ var bcrypt = require('bcrypt');
 const e = require('express');
 
 UserModel.create = (username, password, email) => {
-    return bcrypt.hash(password, 10)
+    return bcrypt.hash(password, 10) 
     .then((hashedPassword) => {
-        let baseSQL = "INSERT INTO users(`username`,`email`,`password`,`created`) VALUES (?,?,?,now());"
+        let baseSQL = "INSERT INTO users(`username`,`email`,`password`,`createdAt`) VALUES (?,?,?,now());"
         return db.execute(baseSQL, [username, email, hashedPassword])
     })
     .then(([results, fields]) => {

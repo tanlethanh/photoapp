@@ -1,9 +1,9 @@
 var db = require('../conf/database');
 const PostModel = {};
 
-PostModel.create = (title, description, photopath, thumbnail, fk_userId) => {
-    let baseSQL = 'INSERT INTO posts (title, description, photopath, thumbnail, created, fk_userid) VALUE (?,?,?,?, now(),?);;';
-    return db.execute(baseSQL,[title, description, photopath, thumbnail, fk_userId])
+PostModel.create = (title, description, video, thumbnail, fk_userId) => {
+    let baseSQL = 'INSERT INTO posts (title, description, video, thumbnail, createAt, fk_userId) VALUE (?,?,?,?, now(),?);;';
+    return db.execute(baseSQL,[title, description, video, thumbnail, fk_userId])
     .then(([results, fields]) => {
         return Promise.resolve(results && results.affectedRows);
     })
@@ -22,7 +22,7 @@ PostModel.search = (searchTerm) => {
 };
 
 PostModel.getNRecentPosts = (numberOfPost) => {
-    let baseSQL = "SELECT id, title, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT 8";
+    let baseSQL = "SELECT id, title, description, thumbnail, createAt FROM posts ORDER BY createAt DESC LIMIT 8";
     return db
         .query(baseSQL, [numberOfPost])
         .then(([results, fields]) => {
@@ -32,7 +32,7 @@ PostModel.getNRecentPosts = (numberOfPost) => {
 };
 
 PostModel.getPostById = (postId) => {
-    let baseSQL = 'SELECT u.username, p.title, p.description, p.photopath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;';
+    let baseSQL = 'SELECT u.username, p.title, p.description, p.video, p.createAt FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;';
     return db
         .execute(baseSQL,[postId])
         .then(([results, fields]) => {
