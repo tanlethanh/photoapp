@@ -42,7 +42,7 @@ PostModel.getPostById = (postId) => {
 };
 
 PostModel.getPostByUserId = (userId) => {
-    const baseSQL = 'SELECT u.username, p.title, p.description, p.thumbnail, p.createAt FROM users u JOIN posts p ON u.id=fk_userid WHERE u.id=?;';
+    const baseSQL = 'SELECT u.username, p.title, p.description, p.thumbnail, p.createAt, p.id FROM users u JOIN posts p ON u.id=fk_userid WHERE u.id=?;';
     return db
         .execute(baseSQL, [userId])
         .then(([results, fields]) => {
