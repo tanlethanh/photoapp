@@ -11,7 +11,13 @@ const { body, validationResult } = require('express-validator');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/images/uploads");
+        if (file.fieldname === "uploadImage") {
+            cb(null, "public/images/uploads");
+        } else if (file.fieldname === "uploadVideo") {
+            cb(null, "public/videos/uploads");
+        } else {
+            cb(new Error("Invalid fieldname"));
+        }
     },
     filename: function (req, file, cb) {
         let fileExt = file.mimetype.split('/')[1];
@@ -20,13 +26,17 @@ var storage = multer.diskStorage({
     }
 });
 
+
 var uploader = multer({ storage: storage });
 
-router.post("/createPost", [body('title').isLength({ min: 0 }), body('description').isLength({ min: 0 })], uploader.single("uploadImage"), (req, res, next) => {
+router.post("/createPost", [body('title').isLength({ min: 0 }), body('description').isLength({ min: 0 })], uploader.fields([
+    { name: 'uploadImage', maxCount: 1 },
+    { name: 'uploadVideo', maxCount: 1 }
+]), (req, res, next) => {
 
-    let fileUploaded = req.file.path;
-    let fileAsThumbnail = `thumbnail-${req.file.filename}`;
-    let destinationOfThumbnail = req.file.destination + "/" + fileAsThumbnail;
+    let fileUploaded = req.files["uploadVideo"][0].path;
+    let fileAsThumbnail = `thumbnail-${req.files["uploadImage"][0].filename}`;
+    let destinationOfThumbnail = req.files["uploadImage"][0].destination + "/" + fileAsThumbnail;
     let title = req.body.title;
     let description = req.body.description;
     let fk_userId = req.session.userId;
@@ -39,7 +49,7 @@ router.post("/createPost", [body('title').isLength({ min: 0 }), body('descriptio
         return res.status(400).json({ errors: errors.array() });
     }
 
-    sharp(fileUploaded)
+    sharp(req.files["uploadImage"][0].path)
         .resize(200)
         .toFile(destinationOfThumbnail)
         .then(() => {

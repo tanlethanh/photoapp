@@ -14,7 +14,10 @@
     <div class="imagePostContent">
         <div class="imageContent" id="imageCard">
             <header id="image-post-title"> {{post.title}} </header>
-            <img id="image-post-image" src="/{{post.video}}">
+            <video controls width="640" height="360">
+                <source src="/{{post.video}}" type="video/mp4">
+            </video>
+            
             <div id="image-post-author" class="info-tags">@{{post.username}}</div>
             <div id="image-post-date" class="info-tags">{{post.createAt}}</div>
             <div id="image-post-desc" class="info-tags">{{post.description}}</div>
