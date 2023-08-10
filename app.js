@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const handlebars = require('express-handlebars');
 const sessions = require('express-session');
-const mysqlSession = require('express-mysql-session')(sessions);
+const MysqlSession = require('express-mysql-session')(sessions);
 const flash = require('express-flash');
 
 const indexRouter = require('./routes/index');
@@ -31,7 +31,7 @@ app.engine(
     })
 );
 
-const mysqlSessionStore = new mysqlSession(
+const mysqlSessionStore = new MysqlSession(
     {
         /* using default options */
     },
