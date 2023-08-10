@@ -1,7 +1,6 @@
 const db = require('../conf/database');
 const UserModel = {};
 const bcrypt = require('bcrypt');
-const e = require('express');
 
 UserModel.create = (username, password, email) => {
     return bcrypt.hash(password, 10)
@@ -45,7 +44,7 @@ UserModel.aunthenticate = (username, password) => {
                 userId = results[0].id;
                 return bcrypt.compare(password, results[0].password);
             } else {
-                return Promise.reject(-1);
+                return Promise.reject(new Error('Something went wrong'));
             }
         })
         .then((passwordsMatch) => {

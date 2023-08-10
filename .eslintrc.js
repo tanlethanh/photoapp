@@ -24,6 +24,7 @@ module.exports = {
     rules: {
         indent: ['error', 4],
         semi: ['error', 'always'],
-        eqeqeq: 'off'
+        eqeqeq: 'off',
+        camelcase: 'off'
     }
 };

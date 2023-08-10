@@ -1,11 +1,11 @@
 const express = require('express');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
 const router = express.Router();
-const db = require('../conf/database');
+// const db = require('../conf/database');
 const UserModel = require('../models/Users');
 const UserError = require('../helpers/error/UserError');
-const app = express();
-const bcrypt = require('bcrypt');
+// const app = express();
+// const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
 
 router.get('/', function (req, res, next) {
@@ -23,13 +23,12 @@ router.post('/register', [body('username').isLength({ min: 3 }).matches(/^[a-zA-
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const cpassword = req.body.cpassword;
+    // const cpassword = req.body.cpassword;
 
     UserModel.usernameExists(username)
         .then((usernameDoesExist) => {
             if (usernameDoesExist) {
-                throw new UserError
-                (
+                throw new UserError(
                     'Registration Failed: Username already exists',
                     '/registration',
                     200
@@ -40,8 +39,7 @@ router.post('/register', [body('username').isLength({ min: 3 }).matches(/^[a-zA-
         })
         .then((emailDoesExist) => {
             if (emailDoesExist) {
-                throw new UserError
-                (
+                throw new UserError(
                     'Registration Failed: Email already exists',
                     '/registration',
                     200

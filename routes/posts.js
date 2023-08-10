@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../conf/database');
-const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
+// const db = require('../conf/database');
+const { errorPrint } = require('../helpers/debug/debugprinters');
 const sharp = require('sharp');
 const multer = require('multer');
 const crypto = require('crypto');

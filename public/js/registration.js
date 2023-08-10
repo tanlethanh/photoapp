@@ -2,7 +2,7 @@ const inputUsername = document.getElementById('inputUsername');
 const inputPassword = document.getElementById('inputPassword');
 const confirmPassword = document.getElementById('inputPasswordConfirm');
 let countSuccess = 0;
-const submitButton = document.getElementById('submitButton');
+// const submitButton = document.getElementById('submitButton');
 
 // username
 inputUsername.onchange = function (event) {
@@ -113,6 +113,7 @@ confirmPassword.onchange = function (event) {
     }
 };
 
+// eslint-disable-next-line no-unused-vars
 function toLoginPage () {
     if (countSuccess == 3) {
         window.location = 'login.html';

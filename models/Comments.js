@@ -1,5 +1,5 @@
 const db = require('../conf/database');
-const { getPostById } = require('./Posts');
+// const { getPostById } = require('./Posts');
 const CommentModel = {};
 
 CommentModel.create = (userId, postId, comment) => {

@@ -11,7 +11,6 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const commentRouter = require('./routes/comments');
-const errorPrint = require('./helpers/debug/debugprinters').errorPrint;
 const requestPrint = require('./helpers/debug/debugprinters').requestPrint;
 
 const app = express();

@@ -27,7 +27,7 @@ postMiddleware.getPostById = async function (req, res, next) {
             res.redirect('/');
         }
     } catch (error) {
-        next(err);
+        next(error);
     }
 };
 

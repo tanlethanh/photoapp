@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const isLoggedin = require('../middleware/routesprotector').userIsLoggedIn;
 const { getNRecentPosts, getPostById, getCommentsByPostId } = require('../middleware/postsmiddleware');
-const db = require('../conf/database');
+// const db = require('../conf/database');
 
 router.get('/', getNRecentPosts, function (req, res, next) {
     res.render('index', { title: "Truman's Page" });
