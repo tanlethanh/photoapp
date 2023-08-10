@@ -1,10 +1,10 @@
-var colors = require('colors');
+const colors = require('colors');
 
 colors.setTheme({
     error: ['black', 'bgRed'],
     success: ['black', 'bgGreen'],
     request: ['black', 'bgWhite']
-})
+});
 
 const printers = {
     errorPrint: (message) => {
@@ -18,6 +18,6 @@ const printers = {
     requestPrint: (message) => {
         console.log(colors.success(message));
     }
-}
+};
 
 module.exports = printers;
