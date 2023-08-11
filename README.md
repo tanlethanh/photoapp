@@ -36,8 +36,14 @@ npm install
 
 This source base already has `eslint` config. You can install `eslint vscode extension`, then enable to use `linting` and `formating`
 
-To connect with `database`, you must provide correct credentials, `root` is default username, password depends on your set up, database name `csc317db` from the DDL 
-
+To connect with `database`, you must provide correct credentials,
+Create new `.env` file
+```
+HOST=localhost
+USERNAME=root
+PASSWORD=123456 # depends on your setup
+DATABASE=csc317db # from DDL
+```
 ![image](https://github.com/tanlethanh/photoapp/assets/104194494/ac680ab4-3c7e-4c39-aee8-18f8deb3f877)
 
 To start application
