@@ -14,15 +14,18 @@
     <div class="imagePostContent">
         <div class="imageContent" id="imageCard">
             <header id="image-post-title"> {{post.title}} </header>
-            <img id="image-post-image" src="/{{post.photopath}}">
+            <img id="image-post-image" src="/{{post.video}}">
             <div id="image-post-author" class="info-tags">@{{post.username}}</div>
-            <div id="image-post-date" class="info-tags">{{post.created}}</div>
+            <div id="image-post-date" class="info-tags">{{post.createAt}}</div>
             <div id="image-post-desc" class="info-tags">{{post.description}}</div>
-
-                    <div class="imageContent" id="comment-container">
+            {{#if check}}
+                 <button id="delete-post-button">
+            <a href="/delete/{{post.id}}">Delete Post</a>
+        </button>            
+            {{/if}}
             <div id="messages">
                 {{#each currentPost.comments}}
-                    {{> comment this}}
+                    {{> comment this}} 
                 {{/each}}
             </div>
 
@@ -56,9 +59,9 @@
         template.innerHTML =
             `<div id="message-${data.commentId}" class="author-holder">
                 <strong class="author-text">@${data.username}</strong>
-                <span class="date-posted">${new Date().toLocaleString()}</span>
+                <span class="date-posted">${data.createAt}</span>
             </div>
-            <div class="comment-text">${data.comment}</div>
+            <div class="comment-text">${data.text}</div>
             `;
             document.getElementById('messages').firstChild.before(template.content.firstChild);
     }

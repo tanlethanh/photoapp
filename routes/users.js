@@ -6,13 +6,13 @@ const UserModel = require('../models/Users');
 const UserError = require('../helpers/error/UserError');
 // const app = express();
 // const bcrypt = require('bcrypt');
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-router.post('/register', [body('username').isLength({ min: 3 }).matches(/^[a-zA-Z]/), body('password').isLength({ min: 8 }).matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)], (req, res, next) => {
+router.post('/register', (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         req.flash('error', 'User account has not been made. One or more requirements were not met.');
@@ -73,7 +73,7 @@ router.post('/register', [body('username').isLength({ min: 3 }).matches(/^[a-zA-
         });
 });
 
-router.post('/login', [body('username').isLength({ min: 3 }).matches(/^[a-zA-Z]/), body('password').isLength({ min: 8 }).matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)], (req, res, next) => {
+router.post('/login', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 

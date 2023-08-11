@@ -2,9 +2,9 @@ const db = require('../conf/database');
 // const { getPostById } = require('./Posts');
 const CommentModel = {};
 
-CommentModel.create = (userId, postId, comment) => {
-    const baseSQL = 'INSERT INTO comments (comment, fk_postid, fk_authorid) VALUES (?,?,?)';
-    return db.query(baseSQL, [comment, postId, userId])
+CommentModel.create = (userId, postId, text) => {
+    const baseSQL = 'INSERT INTO comments (text, fk_postid, fk_userId) VALUES (?,?,?)';
+    return db.query(baseSQL, [text, postId, userId])
         .then(([results, fields]) => {
             if (results && results.affectedRows) {
                 return Promise.resolve(results.insertId);
@@ -16,7 +16,7 @@ CommentModel.create = (userId, postId, comment) => {
 };
 
 CommentModel.getCommentsForPost = (postId) => {
-    const baseSQL = 'SELECT u.username, c.comment, c.created, c.id FROM comments c JOIN users u on u.id=fk_authorid WHERE c.fk_postid=? ORDER BY c.created DESC';
+    const baseSQL = 'SELECT u.username, c.text, c.createAt, c.id FROM comments c JOIN users u on u.id=c.fk_userId WHERE c.fk_postid=? ORDER BY c.createAt DESC';
     return db.query(baseSQL, [postId])
         .then(([results, fields]) => {
             return Promise.resolve(results);

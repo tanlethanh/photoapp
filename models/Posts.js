@@ -1,9 +1,9 @@
 const db = require('../conf/database');
 const PostModel = {};
 
-PostModel.create = (title, description, photopath, thumbnail, fk_userId) => {
-    const baseSQL = 'INSERT INTO posts (title, description, photopath, thumbnail, created, fk_userid) VALUE (?,?,?,?, now(),?);;';
-    return db.execute(baseSQL, [title, description, photopath, thumbnail, fk_userId])
+PostModel.create = (title, description, video, thumbnail, fk_userId) => {
+    const baseSQL = 'INSERT INTO posts (title, description, video, thumbnail, createAt, fk_userID) VALUE (?,?,?,?, now(),?);;';
+    return db.execute(baseSQL, [title, description, video, thumbnail, fk_userId])
         .then(([results, fields]) => {
             return Promise.resolve(results && results.affectedRows);
         })
@@ -22,7 +22,7 @@ PostModel.search = (searchTerm) => {
 };
 
 PostModel.getNRecentPosts = (numberOfPost) => {
-    const baseSQL = 'SELECT id, title, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT 8';
+    const baseSQL = 'SELECT id, title, description, thumbnail, createAt FROM posts ORDER BY createAt DESC LIMIT 8';
     return db
         .query(baseSQL, [numberOfPost])
         .then(([results, fields]) => {
@@ -32,13 +32,32 @@ PostModel.getNRecentPosts = (numberOfPost) => {
 };
 
 PostModel.getPostById = (postId) => {
-    const baseSQL = 'SELECT u.username, p.title, p.description, p.photopath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;';
+    const baseSQL = 'SELECT u.username, p.title, p.description, p.video, p.createAt, p.id FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;';
     return db
         .execute(baseSQL, [postId])
         .then(([results, fields]) => {
             return Promise.resolve(results);
         })
         .catch(err => Promise.reject(err));
+};
+
+PostModel.getPostByUserId = (userId) => {
+    const baseSQL = 'SELECT u.username, p.title, p.description, p.thumbnail, p.createAt, p.id FROM users u JOIN posts p ON u.id=fk_userid WHERE u.id=?;';
+    return db
+        .execute(baseSQL, [userId])
+        .then(([results, fields]) => {
+            return Promise.resolve(results);
+        })
+        .catch(err => Promise.reject(err));
+};
+
+PostModel.deletePost = (postId) => {
+    const baseSQL = 'DELETE FROM posts WHERE id = ?;';
+    return db.execute(baseSQL, [postId])
+        .then(([results, fields]) => {
+            return Promise.resolve(results && results.affectedRows);
+        })
+        .catch((err) => Promise.reject(err));
 };
 
 module.exports = PostModel;

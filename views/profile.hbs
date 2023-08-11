@@ -1,0 +1,17 @@
+<div>
+  <p>
+    <label for="Username">Username: {{ user.username }}</label>
+  </p>
+  <p>
+    <label for="Email">Email: {{ user.email }}</label>
+  </p>
+  <p>
+    <label for="CreatedAt">Created: {{ user.createdAt }}</label>
+  </p>
+      <h3>Your Post</h3>
+</div>
+<div id="main-content">
+  {{#each posts}}
+    {{> card this}}
+  {{/each}}
+</div>

@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 UserModel.create = (username, password, email) => {
     return bcrypt.hash(password, 10)
         .then((hashedPassword) => {
-            const baseSQL = 'INSERT INTO users(`username`,`email`,`password`,`created`) VALUES (?,?,?,now());';
+            const baseSQL = 'INSERT INTO users(`username`,`email`,`password`,`createdAt`) VALUES (?,?,?,now());';
             return db.execute(baseSQL, [username, email, hashedPassword]);
         })
         .then(([results, fields]) => {
@@ -24,6 +24,16 @@ UserModel.usernameExists = (username) => {
             return Promise.resolve(!(results && results.length == 0));
         })
         .catch((err) => Promise.reject(err));
+};
+
+UserModel.getUserById = (userId) => {
+    const baseSQL = 'SELECT username, email, createdAt FROM users WHERE id=?;';
+    return db
+        .execute(baseSQL, [userId])
+        .then(([results, fields]) => {
+            return Promise.resolve(results);
+        })
+        .catch(err => Promise.reject(err));
 };
 
 UserModel.emailExists = (email) => {
