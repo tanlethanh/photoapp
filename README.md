@@ -13,7 +13,7 @@ The purpose of the term project is to build a fully functional web application.
 
 # Setup Tutorial
 ## Database
-We need both `mysql server` and `mysql workbench`. Using `workbench` to easily connect, migrate database.
+We need both `mysql server` and `mysql workbench`. Using `workbench` to easily connect, manage and migrate database.
 - First, open `database.mwb` by `workbench`.
 - Export `DDL` scripts from the schema file
 
@@ -36,9 +36,13 @@ npm install
 
 This source base already has `eslint` config. You can install `eslint vscode extension`, then enable to use `linting` and `formating`
 
-To connect with `database`, you must provide correct credentials, `root` is default username, password depends on your set up, database name `csc317db` from the DDL 
-
-![image](https://github.com/tanlethanh/photoapp/assets/104194494/ac680ab4-3c7e-4c39-aee8-18f8deb3f877)
+To connect with `database`, you must provide correct credentials, create new file name `.env` at root of project
+```
+HOST=localhost
+USERNAME=root
+PASSWORD=123456 # depends on your setup
+DATABASE=csc317db # from DDL
+```
 
 To start application
 ```
