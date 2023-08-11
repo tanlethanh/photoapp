@@ -4,7 +4,6 @@ const isLoggedin = require('../middleware/routesprotector').userIsLoggedIn;
 const { getNRecentPosts, getPostById, getCommentsByPostId } = require('../middleware/postsmiddleware');
 const { getUserById } = require('../models/Users');
 const { getPostByUserId, deletePost } = require('../models/Posts');
-const { deletePostComments } = require('../models/Comments');
 
 // const db = require('../conf/database');
 
@@ -47,7 +46,6 @@ router.get('/post/:id(\\d+)', getPostById, getCommentsByPostId, (req, res, next)
 
 router.get('/delete/:id(\\d+)', async (req, res, next) => {
     const postId = req.params.id;
-    await deletePostComments(postId);
     await deletePost(postId);
     res.redirect('/');
 });
