@@ -12,9 +12,13 @@ The purpose of the term project is to build a fully functional web application.
 | Student Email | tduong7@sfsu.edu    |
 
 #### Build Instructions
-1. cd csc317-termproject-doomphd
+1. cd photoapp
 2. npm install
+++ Setup database
+1. Open database.mwb
+2. Use forward engine to create new database schema
+3. Update conf\database.js file.
 
 ##### Run Instructions
-1. cd application
-2. nodemon
+1. cd photoapp
+2. npm start
