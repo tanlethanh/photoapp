@@ -1,12 +1,13 @@
-       <form method="POST" id="registrationForm" action="/users/register" enctype="application/x-www-form-urlencoded" >
+    <script src="../public/js/registration.js"></script>
+    <form method="POST" id="registrationForm" action="/users/register" enctype="application/x-www-form-urlencoded" >
 
-            <div class = "userInput">
+        <div class = "userInput">
             <p>
             <label for="Username">Username</label>
             <input type="text" id="inputUsername" name="username" placeholder="Username" required/> 
             <span class="details" id="usernameDetails"> </span>
             </p>     
-            <p>
+            <p> 
             <label for="Email Address">Email Address</label>
             <input type="email" id="inputEmail" name="email" placeholder="Email Adress" required/>
             <span class="details" id="emailDetails"> </span>
@@ -35,4 +36,4 @@
             <br >
         </div>           
             <input type="submit" name="submit" value="submit" onclick="if(document.getElementById('checkBoxId').checked && document.getElementById('checkBoxId2').checked ) { redirect();} else { alert('Invalid Try Again'); return false; }"/>
-        </form>
+    </form>
