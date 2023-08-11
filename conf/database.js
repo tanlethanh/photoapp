@@ -9,7 +9,5 @@ const pool = mysql.createPool({
     debug: false
 });
 
-console.log(process.env.DB_HOST, process.env.DB_USERNAME, process.env.DB_PASSWORD, process.env.DB_DATABASE, '<--');
-
 const promisePool = pool.promise();
 module.exports = promisePool;
