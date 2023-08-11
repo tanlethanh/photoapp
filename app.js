@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -14,7 +16,6 @@ const commentRouter = require('./routes/comments');
 const requestPrint = require('./helpers/debug/debugprinters').requestPrint;
 
 const app = express();
-require('dotenv').config();
 
 app.engine(
     'hbs',
