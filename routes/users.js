@@ -34,7 +34,7 @@ router.post('/register', (req, res, next) => {
                     200
                 );
             } else {
-                UserModel.emailExists(email);
+                return UserModel.emailExists(email);
             }
         })
         .then((emailDoesExist) => {
