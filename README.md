@@ -18,7 +18,8 @@ The purpose of the term project is to build a fully functional web application.
 1. Open database.mwb
 2. Use forward engine to create new database schema
 3. Update conf\database.js file.
-
+++ Setup structure 
+1. Inside photoapp/public/ create new folder videos/uploads
 ##### Run Instructions
 1. cd photoapp
 2. npm start
