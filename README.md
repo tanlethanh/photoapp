@@ -13,7 +13,7 @@ The purpose of the term project is to build a fully functional web application.
 
 # Setup Tutorial
 ## Database
-We need both `mysql server` and `mysql workbench`. Using `workbench` to easily connect, migrate database.
+We need both `mysql server` and `mysql workbench`. Using `workbench` to easily connect, manage and migrate database.
 - First, open `database.mwb` by `workbench`.
 - Export `DDL` scripts from the schema file
 
