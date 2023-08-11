@@ -43,7 +43,6 @@ USERNAME=root
 PASSWORD=123456 # depends on your setup
 DATABASE=csc317db # from DDL
 ```
-![image](https://github.com/tanlethanh/photoapp/assets/104194494/ac680ab4-3c7e-4c39-aee8-18f8deb3f877)
 
 To start application
 ```
