@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const db = require('../conf/database');
 const { errorPrint } = require('../helpers/debug/debugprinters');
 const sharp = require('sharp');
 const multer = require('multer');
@@ -32,9 +31,9 @@ router.post('/createPost', [body('title').isLength({ min: 1 }), body('descriptio
     { name: 'uploadImage', maxCount: 1 },
     { name: 'uploadVideo', maxCount: 1 }
 ]), (req, res, next) => {
-    const fileUploaded = req.files['uploadVideo'][0].path;
-    const fileAsThumbnail = `thumbnail-${req.files['uploadImage'][0].filename}`;
-    const destinationOfThumbnail = req.files['uploadImage'][0].destination + '/' + fileAsThumbnail;
+    const fileUploaded = req.files.uploadVideo[0].path;
+    const fileAsThumbnail = `thumb nail-${req.files.uploadImage[0].filename}`;
+    const destinationOfThumbnail = req.files.uploadImage[0].destination + '/' + fileAsThumbnail;
     const title = req.body.title;
     const description = req.body.description;
     const fk_userId = req.session.userId;
@@ -46,7 +45,7 @@ router.post('/createPost', [body('title').isLength({ min: 1 }), body('descriptio
         return res.status(400).json({ errors: errors.array() });
     }
 
-    sharp(req.files['uploadImage'][0].path)
+    sharp(req.files.uploadImage[0].path)
         .resize(200)
         .toFile(destinationOfThumbnail)
         .then(() => {
