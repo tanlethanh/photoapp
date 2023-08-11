@@ -5,7 +5,7 @@ const pool = mysql.createPool({
     user: 'root',
     // password: '1234',
     // database: 'photoappdb',
-    password: '123456',
+    password: '0000',
     database: 'csc317db',
     connectionLimit: 50,
     debug: false
