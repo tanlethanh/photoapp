@@ -61,3 +61,5 @@ typings/
 .next
 
 node_modules
+public/videos/uploads
+public/images/uploads

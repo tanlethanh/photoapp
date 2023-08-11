@@ -14,6 +14,7 @@ const commentRouter = require('./routes/comments');
 const requestPrint = require('./helpers/debug/debugprinters').requestPrint;
 
 const app = express();
+require('dotenv').config();
 
 app.engine(
     'hbs',

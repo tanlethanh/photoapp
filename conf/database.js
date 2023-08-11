@@ -1,12 +1,10 @@
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    // password: '1234',
-    // database: 'photoappdb',
-    password: '0000',
-    database: 'csc317db',
+    host: process.env.HOST,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
     connectionLimit: 50,
     debug: false
 });

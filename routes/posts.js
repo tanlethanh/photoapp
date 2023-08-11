@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
 
 const uploader = multer({ storage });
 
-router.post('/createPost', [body('title').isLength({ min: 0 }), body('description').isLength({ min: 0 })], uploader.fields([
+router.post('/createPost', [body('title').isLength({ min: 1 }), body('description').isLength({ min: 1 })], uploader.fields([
     { name: 'uploadImage', maxCount: 1 },
     { name: 'uploadVideo', maxCount: 1 }
 ]), (req, res, next) => {
