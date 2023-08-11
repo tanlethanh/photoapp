@@ -36,8 +36,7 @@ npm install
 
 This source base already has `eslint` config. You can install `eslint vscode extension`, then enable to use `linting` and `formating`
 
-To connect with `database`, you must provide correct credentials,
-Create new `.env` file
+To connect with `database`, you must provide correct credentials, create new file name `.env` at root of project
 ```
 HOST=localhost
 USERNAME=root
