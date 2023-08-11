@@ -38,16 +38,6 @@ router.post('/createPost', [body('title').isLength({ min: 1 }), body('descriptio
     const description = req.body.description;
     const fk_userId = req.session.userId;
 
-    console.log(req, '<--');
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        console.log(errors, '<-- errors');
-        req.flash('error', 'Post could not be made');
-        res.redirect('/');
-        return res.status(400).json({ errors: errors.array() });
-    }
-
     sharp(req.files.uploadImage[0].path)
         .resize(200)
         .toFile(destinationOfThumbnail)
@@ -61,6 +51,7 @@ router.post('/createPost', [body('title').isLength({ min: 1 }), body('descriptio
             );
         })
         .then((postWasCreated) => {
+            console.log({ postWasCreated });
             if (postWasCreated) {
                 req.flash('success', 'Post was created successfully');
                 res.redirect('/');
